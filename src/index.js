@@ -1,7 +1,10 @@
-import {ToDoTask, Project} from "./classModule"
+import {ToDoTask, Project, ProjectList} from "./classModule"
 import "./styles.css"
 
-const project1 = new Project ('Project number #1');
+const projectListObject = new ProjectList;
+projectListObject.addProjectToList = new Project ('Default Project');
 
-// project1.addTask('Title11', 'description', 'dueDate', 'priority', 'notes');
-project1.printValues();
+
+for (let i in projectListObject.projectListArray) {
+    console.log(projectListObject.projectListArray[i]);
+}

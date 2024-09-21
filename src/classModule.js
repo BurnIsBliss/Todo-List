@@ -6,6 +6,19 @@ class ToDoTask {
         dueDate,
         priority,
         notes
+        // implement checklist later
+    }
+
+    editTask (...args) {
+        console.log(args);
+        for (let i in args) {
+            if (args[i] === "") continue;
+            else this.args[i] = args[i];
+        }
+    }
+
+    get values() {
+        return [this.title, this.description, this.dueDate, this.priority, this.notes];
     }
 }
 
@@ -24,6 +37,26 @@ class Project {
         let task = new ToDoTask (title, description, dueDate, priority, notes);
         this.toDoList.push(task);
     }
+
+    deleteTask (taskIndex) {
+        this.toDoList.splice(taskIndex, 1);
+    }
 }
 
-export {ToDoTask, Project}
+class ProjectList {
+
+    constructor () {
+        this.listOfProject = [];
+    }
+    
+    set addProjectToList (addProject) {
+        this.listOfProject.push(addProject);
+    }
+
+    get projectListArray () {
+        return this.listOfProject;
+    }
+
+}
+
+export {ToDoTask, Project, ProjectList}
