@@ -3,4 +3,42 @@
     border: 0;
     color: white;
     background-color: black;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+input {
+    border: 2px solid white;
+    padding: 7px;
+    border-radius: 8px;
+    width: 60%;
+    background-color: white;
+    color: black;
+}
+
+button {
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}
+
+input:focus {
+    border: 2px solid red;
+}
+
+.projectModal {
+    font-size: 36px;
+    border: 2px solid grey;
+    padding: 50px;
+    border-radius: 8px;
+}
+
+.formContainer {
+    display: grid;
+    gap: 8px;
+    justify-items: center;
 }

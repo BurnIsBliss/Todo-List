@@ -6,6 +6,19 @@
     <title>to-do project</title>
 </head>
 <body>
-    
+    <button id="addProject">Add Project</button>
+    <button id="deleteProject">Delete Project</button>
+
+    <dialog class="projectModal">
+        <div class="formContainer">
+            <label for="name_of_project">Enter your project name</label>
+            <input type="text" id="name_of_project" name="name_of_project" placeholder="Shopping List" autofocus required>
+            <div class="buttonContainer">
+                <button class="closeButton" type="reset">Close</button>
+                <button class="submitButton" type="submit">Submit</button>
+            </div>
+        </div>
+    </dialog>
+
 </body>
 </html>
