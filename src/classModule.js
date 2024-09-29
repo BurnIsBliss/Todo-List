@@ -11,7 +11,6 @@ class ToDoTask {
     }
 
     editTask (...args) {
-        console.log(args);
         this.title = args[0];
         this.description = args[1];
         this.dueDate = args[2];

@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>to-do project</title>
+    <title>to-do App</title>
 </head>
 <body>
-    <button id="addProject">Add Project</button>
-    <button id="deleteProject">Delete Project</button>
+    <div class="projectList">
+        <h2>Your Project(s)</h2>
+        <div class="buttonContainerProjectList">
+            <button id="addProject" type="button">New Project</button>
+            <button id="deleteProject" type="button">Delete Project</button>
+        </div>
+        <div class="projectListContainer">
+        </div>
+    </div>
 
     <dialog class="projectModal">
-        <div class="formContainer">
+        <form post="./post1.txt" method="post">
             <label for="name_of_project">Enter your project name</label>
-            <input type="text" id="name_of_project" name="name_of_project" placeholder="Shopping List" autofocus required>
+            <input type="text" id="name_of_project" name="name_of_project" placeholder="Shopping List" required>
             <div class="buttonContainer">
                 <button class="closeButton" type="reset">Close</button>
                 <button class="submitButton" type="submit">Submit</button>
             </div>
-        </div>
+        </form>
     </dialog>
 
 </body>
