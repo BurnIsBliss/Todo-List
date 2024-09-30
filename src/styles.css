@@ -48,6 +48,30 @@ input:focus {
     border-radius: 8px;
 }
 
+.projectListContainer {
+    font-size: 20px;
+    padding-top: 18px;
+}
+
+.projectListContainer > div {
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 6px;
+}
+
+.projectListContainer > div:has(> input:checked), .projectListContainer > div > input:checked + label{
+    background-color: yellow;
+    color: black;
+}
+
+.projectListContainer > div > input {
+    visibility: hidden;
+    padding: 0;
+    margin: 0;
+    width: 0;
+}
+
 .projectModal > form {
     display: grid;
     gap: 8px;

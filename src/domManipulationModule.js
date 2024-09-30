@@ -1,4 +1,7 @@
-import {populateStorage, fetchStorage} from "./webStorageAPI";
+import { populateStorage, fetchStorage } from "./webStorageAPI";
+import { ProjectList } from "./classModule";
+
+const projectListObject = new ProjectList;
 
 function formButtonFunctionality () {
     const addProjectButton = document.querySelector('#addProject');
@@ -13,25 +16,64 @@ function formButtonFunctionality () {
         document.querySelector('.projectModal').close();
     })
 
-    submitButton.addEventListener("click", () => {
+    submitButton.addEventListener("click", (event) => {
+        event.preventDefault();
         let projectNameValue = document.querySelector('#name_of_project').value;
         if (projectNameValue) {
             document.querySelector('.projectModal').close();
+            projectListObject.addProjectToList = projectNameValue;
             populateStorage(projectNameValue);
+            document.querySelector('.projectModal > form').reset();
+            displayProjectList();
         }
-        document.querySelector('.projectModal > form').reset();
     })
 }
 
 function displayProjectList () {
     const projectListContainer = document.querySelector('.projectListContainer');
-    if (fetchStorage()) {
-        for (let i in fetchStorage()) {
+
+    removeChildElements(projectListContainer);
+    const fetchStorageOutput = fetchStorage();
+
+    if (fetchStorageOutput) {
+        for (let i in fetchStorageOutput) {
             let divElement = document.createElement('div');
-            divElement.textContent = i;
+            let radioElement = document.createElement('input');
+            let labelElement = document.createElement('label');
+            radioElement.setAttribute('type', 'radio');
+            radioElement.setAttribute('id', fetchStorageOutput[i]);
+            radioElement.setAttribute('name', 'projectNameRadio');
+            radioElement.setAttribute('value', fetchStorageOutput[i]);
+
+            labelElement.setAttribute('for', fetchStorageOutput[i]);
+            labelElement.textContent = fetchStorageOutput[i];
+
+            divElement.append(radioElement, labelElement);
+
+            // divElement.textContent = fetchStorageOutput[i];
             projectListContainer.appendChild(divElement);
         }
     }
 }
 
-export {formButtonFunctionality, displayProjectList}
+function deleteButtonFunctionality () {
+    const deleteButton = document.querySelector('#deleteProject');
+
+    deleteButton.addEventListener("click", () => {
+        if (document.querySelector('.projectListContainer > div > input:checked')) {
+            let fetchStorageOutput = fetchStorage();
+            console.log(fetchStorageOutput);
+            let inputElementValue = (document.querySelector('.projectListContainer > div > input:checked').value);
+            let elementIndex = fetchStorageOutput.indexOf(inputElementValue);
+            fetchStorageOutput.splice(elementIndex, 1);
+            populateStorage(fetchStorageOutput);
+            displayProjectList();
+        }
+    })
+}
+
+function removeChildElements (parent) {
+    while (parent.lastChild) parent.removeChild(parent.lastChild);
+}
+
+export {formButtonFunctionality, displayProjectList, projectListObject, deleteButtonFunctionality}

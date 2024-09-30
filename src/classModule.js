@@ -34,6 +34,10 @@ class Project {
         this.toDoList = []
     }
 
+    returnProjectName = () => {
+        return this.projectName;
+    }
+
     printValues = () => {
         console.log(this.projectName, this.toDoList.length);
         console.table(this.toDoList);
@@ -61,7 +65,7 @@ class ProjectList {
     }
     
     set addProjectToList (addProject) {
-        this.listOfProject.push(addProject);
+        this.listOfProject.push(new Project (addProject));
     }
 
     get projectListArray () {

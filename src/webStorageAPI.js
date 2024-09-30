@@ -1,12 +1,17 @@
 function populateStorage (value) {
-    let arrayValue = fetchStorage();
-    if (!arrayValue) {
-        arrayValue=[value]; 
+    if (Array.isArray(value)) {
+        sessionStorage.setItem("projectList", JSON.stringify(value));
     }
     else {
-        arrayValue.push(value);
+        let arrayValue = fetchStorage();
+        if (!arrayValue) {
+            arrayValue=[value]; 
+        }
+        else {
+            arrayValue.push(value);
+        }
+        sessionStorage.setItem("projectList", JSON.stringify(arrayValue));
     }
-    sessionStorage.setItem("projectList", JSON.stringify(arrayValue));
 }
 
 function fetchStorage () {
