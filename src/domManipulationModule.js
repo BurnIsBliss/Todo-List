@@ -62,10 +62,10 @@ function deleteButtonFunctionality () {
     deleteButton.addEventListener("click", () => {
         if (document.querySelector('.projectListContainer > div > input:checked')) {
             let fetchStorageOutput = fetchStorage();
-            console.log(fetchStorageOutput);
             let inputElementValue = (document.querySelector('.projectListContainer > div > input:checked').value);
             let elementIndex = fetchStorageOutput.indexOf(inputElementValue);
             fetchStorageOutput.splice(elementIndex, 1);
+            projectListObject.removeProjectFromList(elementIndex);
             populateStorage(fetchStorageOutput);
             displayProjectList();
         }

@@ -77,3 +77,66 @@ input:focus {
     gap: 8px;
     justify-items: center;
 }
+
+fieldset {
+    display: flex;
+    gap: 14px;
+    border: 2px solid white;
+    padding: 40px;
+    border-radius: 5px;
+    font-size: 22px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.taskModalMainContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-align: right;
+}
+
+.inputsContainer {
+    gap: 20px;
+}
+
+.labelsContainer, .inputsContainer {
+    display: grid;
+}
+
+select {
+    width: 90px;
+    height: 34px;
+}
+
+textarea, select {
+    background-color: white;
+    color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+} 
+
+option {
+    font-size: 22px;
+}
+
+.inputsContainer > input {
+    width: 180px;
+}
+
+textarea {
+    height: 30px;
+}
+
+.labelsContainer > div {
+    height: 31px;
+}
+
+.labelsContainer {
+    display: grid;
+    gap: 20px;
+}
+
+
+
+

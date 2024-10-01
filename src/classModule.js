@@ -72,6 +72,10 @@ class ProjectList {
         return this.listOfProject;
     }
 
+    removeProjectFromList(value) {
+        this.listOfProject.splice(value, 1);
+    }
+
 }
 
 export {ToDoTask, Project, ProjectList}

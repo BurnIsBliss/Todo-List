@@ -27,5 +27,37 @@
         </form>
     </dialog>
 
+    <dialog class="taskModal" open>
+        <form action="./task.txt" method="post">
+            <fieldset>
+                <legend>Task Details</legend>
+                <div class="taskModalMainContainer">
+                    <div class="labelsContainer">
+                        <div><label for="">TaskName</label></div>
+                        <div><label>Description</label></div>
+                        <div><label>dueDate</label></div>
+                        <div><label for="">priority</label></div>
+                        <div><label>Notes</label></div>
+                    </div>
+                    <div class="inputsContainer">
+                        <input type="text">
+                        <input type="text">
+                        <input type="date" name="">
+                        <select name="" id="">
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <textarea name=""></textarea>
+                    </div>
+                </div>
+                <div class="buttonContainerTaskModal">
+                    <button type="reset">Close</button>
+                    <button type="submit">Submit</button>
+                </div>
+            </fieldset>
+        </form>
+    </dialog>
+
 </body>
 </html>
