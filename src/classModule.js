@@ -19,6 +19,14 @@ class ToDoTask {
         this.notes = args[4];
     }
 
+    get getTaskTitle () {
+        return this.title
+    }
+
+    get getDueDate () {
+        return this.dueDate
+    }
+    
     get values() {
         return [this.title, this.description, this.dueDate, this.priority, this.notes, this.completionStatus];
     }
@@ -68,10 +76,6 @@ class ProjectList {
     
     set addProjectToList (addProject) {
         this.listOfProject.push(new Project (addProject));
-    }
-
-    set addProjectFromStorage (addProject) {
-        this.listOfProject.push(addProject);
     }
 
     get projectListArray () {

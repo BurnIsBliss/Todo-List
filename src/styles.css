@@ -9,7 +9,7 @@
 body {
     display: grid;
     grid-template-columns: 1.5fr 5fr;
-    grid-template-rows: 1fr 5fr;
+    grid-template-rows: 1fr 1fr 5fr;
 }
 
 .projectList {
@@ -162,4 +162,12 @@ textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.addTaskButtonContainer {
+    text-align: center;
+}
+
+.taskContainer > div {
+    border: 2px solid red;
 }

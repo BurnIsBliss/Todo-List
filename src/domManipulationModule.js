@@ -27,6 +27,7 @@ function formButtonFunctionality () {
             populateStorage(projectListObject.listOfProject);
             document.querySelector('.projectModal > form').reset();
             displayProjectList();
+            displayTasksFromProjectList();
         }
     })
 }
@@ -64,10 +65,17 @@ function deleteButtonFunctionality () {
     deleteButton.addEventListener("click", () => {
         if (document.querySelector('.projectListContainer > div > input:checked')) {
             let inputElementValue = (document.querySelector('.projectListContainer > div > input:checked').value);
-            let elementIndex = projectListObject.projectListArray.indexOf(inputElementValue);
+            let elementIndex = -1;
+            for (let i in projectListObject.projectListArray) {
+                if (inputElementValue==projectListObject.projectListArray[i].returnProjectName) {
+                    elementIndex = i;
+                    break
+                }
+            }
             projectListObject.removeProjectFromList(elementIndex);
             populateStorage(projectListObject.projectListArray);
             displayProjectList();
+            displayTasksFromProjectList();
         }
     })
 }
@@ -103,6 +111,8 @@ function removeChildElements (parent) {
             console.log(projectListObject.projectListArray);
             document.querySelector('.taskModal > form').reset();
             document.querySelector('.taskModal').close();
+            // displayTasks(document.querySelector('.projectListContainer > div > input:checked').value);
+            displayTasks();
         }
     })
 
@@ -119,6 +129,46 @@ function removeChildElements (parent) {
     })
 })();
 
+function displayTasks () {
+    if (!document.querySelector('.projectListContainer > div > input:checked')) return
+    const taskContainerElement = document.querySelector('.taskContainer');
+    console.log();
+    removeChildElements(taskContainerElement);
+
+    let elementIndex = -1;
+    for (let i in projectListObject.projectListArray) {
+        if (document.querySelector('.projectListContainer > div > input:checked').value == projectListObject.projectListArray[i].returnProjectName) {
+            elementIndex = i;
+            break
+        }
+    }
+
+    for (let task of projectListObject.projectListArray[elementIndex].getToDoList()) {
+        let divElement = document.createElement('div');
+        divElement.setAttribute('class', task.getTaskTitle);
+
+        let innerDiv1 = document.createElement('div');
+        let innerDiv2 = document.createElement('div');
+
+        innerDiv1.textContent = task.getTaskTitle;
+        innerDiv2.textContent = task.getDueDate;
+
+        divElement.appendChild(innerDiv1);
+        divElement.appendChild(innerDiv2);
+
+        taskContainerElement.appendChild(divElement);
+    }
+}
+
+function displayTasksFromProjectList () {
+    const allProjectContainer = document.querySelectorAll('.projectListContainer > div');
+    console.log(allProjectContainer);
+    allProjectContainer.forEach((element) => {
+        element.addEventListener('click', () => displayTasks());
+    })
+}
 
 
-export {formButtonFunctionality, displayProjectList, projectListObject, deleteButtonFunctionality}
+
+
+export {formButtonFunctionality, displayProjectList, projectListObject, deleteButtonFunctionality, displayTasksFromProjectList}
