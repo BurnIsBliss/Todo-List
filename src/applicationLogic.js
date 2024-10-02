@@ -13,6 +13,7 @@ function valueFromTaskForm () {
 
 function createNewTodo (projectObjectIndex) {
     const taskDetails = valueFromTaskForm();
+    console.log( projectListObject.projectListArray[projectObjectIndex], projectObjectIndex);
     projectListObject.projectListArray[projectObjectIndex].addTask(taskDetails[0], taskDetails[1], taskDetails[2], taskDetails[3], taskDetails[4]);
 
 }

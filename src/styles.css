@@ -139,7 +139,7 @@ textarea {
 
 .headingToDo {
     text-align: center;
-    text-decoration: underline wavy rgb(137, 240, 11);
+    text-decoration: underline double rgb(240, 145, 11);
 }
 /* #addProject {
     display: flex;
@@ -158,6 +158,8 @@ textarea {
     justify-content: center;
 }
 
-input:invalid {
-    border: 2px solid rebeccapurple;
+.taskContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

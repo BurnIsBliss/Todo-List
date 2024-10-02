@@ -24,7 +24,7 @@ function formButtonFunctionality () {
         if (projectNameValue) {
             document.querySelector('.projectModal').close();
             projectListObject.addProjectToList = projectNameValue;
-            populateStorage(projectNameValue);
+            populateStorage(projectListObject.listOfProject);
             document.querySelector('.projectModal > form').reset();
             displayProjectList();
         }
@@ -38,17 +38,17 @@ function displayProjectList () {
     const fetchStorageOutput = fetchStorage();
 
     if (fetchStorageOutput) {
-        for (let i in fetchStorageOutput) {
+        for (let i in projectListObject.listOfProject) {
             let divElement = document.createElement('div');
             let radioElement = document.createElement('input');
             let labelElement = document.createElement('label');
             radioElement.setAttribute('type', 'radio');
-            radioElement.setAttribute('id', fetchStorageOutput[i]);
+            radioElement.setAttribute('id', fetchStorageOutput[i].projectName);
             radioElement.setAttribute('name', 'projectNameRadio');
-            radioElement.setAttribute('value', fetchStorageOutput[i]);
+            radioElement.setAttribute('value', fetchStorageOutput[i].projectName);
 
-            labelElement.setAttribute('for', fetchStorageOutput[i]);
-            labelElement.textContent = fetchStorageOutput[i];
+            labelElement.setAttribute('for', fetchStorageOutput[i].projectName);
+            labelElement.textContent = fetchStorageOutput[i].projectName;
 
             divElement.append(radioElement, labelElement);
 
@@ -63,12 +63,10 @@ function deleteButtonFunctionality () {
 
     deleteButton.addEventListener("click", () => {
         if (document.querySelector('.projectListContainer > div > input:checked')) {
-            let fetchStorageOutput = fetchStorage();
             let inputElementValue = (document.querySelector('.projectListContainer > div > input:checked').value);
-            let elementIndex = fetchStorageOutput.indexOf(inputElementValue);
-            fetchStorageOutput.splice(elementIndex, 1);
+            let elementIndex = projectListObject.projectListArray.indexOf(inputElementValue);
             projectListObject.removeProjectFromList(elementIndex);
-            populateStorage(fetchStorageOutput);
+            populateStorage(projectListObject.projectListArray);
             displayProjectList();
         }
     })
@@ -87,15 +85,25 @@ function removeChildElements (parent) {
     })
 
     submitTaskButton.addEventListener ('click', (event) => {
-        event.preventDefault();
-        let fetchStorageOutput = fetchStorage();
-        let inputElementValue = (document.querySelector('.projectListContainer > div > input:checked').value);
-        let elementIndex = fetchStorageOutput.indexOf(inputElementValue);
-        createNewTodo(elementIndex);
-        document.querySelector('.taskModal > form').reset();
-        document.querySelector('.taskModal').close();
 
-
+        if (document.querySelector('#taskName').value && document.querySelector('#taskDesc').value && document.querySelector('#dueDate').value) {
+            event.preventDefault();
+            let elementIndex = -1;
+            let fetchStorageOutput = fetchStorage();
+            let inputElementValue = (document.querySelector('.projectListContainer > div > input:checked').value);
+            for (let i in fetchStorageOutput) {
+                if (fetchStorageOutput[i].projectName == inputElementValue) {
+                    elementIndex = i; 
+                    break;
+                }
+            }
+            console.log(inputElementValue, elementIndex);
+            createNewTodo(elementIndex);
+            populateStorage(projectListObject.projectListArray);
+            console.log(projectListObject.projectListArray);
+            document.querySelector('.taskModal > form').reset();
+            document.querySelector('.taskModal').close();
+        }
     })
 
 })();

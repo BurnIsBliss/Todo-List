@@ -1,6 +1,7 @@
 import  {Project, ProjectList} from "./classModule"
 import "./styles.css"
 import {formButtonFunctionality, displayProjectList, projectListObject, deleteButtonFunctionality} from "./domManipulationModule";
+import { initializeProjectsFromSessionStorage } from "./webStorageAPI";
 
 // const project_1 = new Project ('Default Project');
 // projectListObject.addProjectToList = project_1;
@@ -15,6 +16,7 @@ import {formButtonFunctionality, displayProjectList, projectListObject, deleteBu
 //     console.log(projectListObject.projectListArray[i]);
 // }
 
+initializeProjectsFromSessionStorage();
 formButtonFunctionality();
 displayProjectList();
 deleteButtonFunctionality();

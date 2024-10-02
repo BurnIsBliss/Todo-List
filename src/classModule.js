@@ -1,6 +1,6 @@
 // To-Do class
 class ToDoTask {
-    
+
     constructor (title, description, dueDate, priority, notes) {
         this.title = title,
         this.description = description,
@@ -36,7 +36,7 @@ class Project {
         this.toDoList = []
     }
 
-    returnProjectName = () => {
+    get returnProjectName () {
         return this.projectName;
     }
 
@@ -70,11 +70,15 @@ class ProjectList {
         this.listOfProject.push(new Project (addProject));
     }
 
+    set addProjectFromStorage (addProject) {
+        this.listOfProject.push(addProject);
+    }
+
     get projectListArray () {
         return this.listOfProject;
     }
 
-    removeProjectFromList(value) {
+    removeProjectFromList (value) {
         this.listOfProject.splice(value, 1);
     }
 
