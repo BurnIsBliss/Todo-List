@@ -28,6 +28,7 @@ function formButtonFunctionality () {
             document.querySelector('.projectModal > form').reset();
             displayProjectList();
             displayTasksFromProjectList();
+            removeChildElements(document.querySelector('.taskContainer'));
         }
     })
 }
@@ -75,7 +76,7 @@ function deleteButtonFunctionality () {
             projectListObject.removeProjectFromList(elementIndex);
             populateStorage(projectListObject.projectListArray);
             displayProjectList();
-            displayTasksFromProjectList();
+            removeChildElements(document.querySelector('.taskContainer'));
         }
     })
 }
