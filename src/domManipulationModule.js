@@ -1,8 +1,10 @@
 import { populateStorage, fetchStorage } from "./webStorageAPI";
 import { ProjectList } from "./classModule";
+import { createNewTodo, editToDo } from "./applicationLogic";
 
 const projectListObject = new ProjectList;
 
+// Function to provide the functionality to the '#addProject', and '.projectModal' buttons
 function formButtonFunctionality () {
     const addProjectButton = document.querySelector('#addProject');
     const closeButton = document.querySelector('.closeButton');
@@ -75,5 +77,40 @@ function deleteButtonFunctionality () {
 function removeChildElements (parent) {
     while (parent.lastChild) parent.removeChild(parent.lastChild);
 }
+
+(function () {
+    const submitTaskButton = document.querySelector('.taskSubmit');
+    const closeTaskButton = document.querySelector('.taskClose');
+
+    closeTaskButton.addEventListener ('click', () => {
+        document.querySelector('.taskModal').close();
+    })
+
+    submitTaskButton.addEventListener ('click', (event) => {
+        event.preventDefault();
+        let fetchStorageOutput = fetchStorage();
+        let inputElementValue = (document.querySelector('.projectListContainer > div > input:checked').value);
+        let elementIndex = fetchStorageOutput.indexOf(inputElementValue);
+        createNewTodo(elementIndex);
+        document.querySelector('.taskModal > form').reset();
+        document.querySelector('.taskModal').close();
+
+
+    })
+
+})();
+
+// Function to add the 'Add Task' button functionality
+(function (){
+    const addTaskButton = document.querySelector('.addTasks');
+    addTaskButton.addEventListener ("click", () => {
+        if (document.querySelector('.projectListContainer > div > input:checked')) {
+            document.querySelector('.taskModal').showModal();
+        }
+        else alert('Select a project or create new one');
+    })
+})();
+
+
 
 export {formButtonFunctionality, displayProjectList, projectListObject, deleteButtonFunctionality}

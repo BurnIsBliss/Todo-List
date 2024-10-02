@@ -1,5 +1,6 @@
 // To-Do class
 class ToDoTask {
+    
     constructor (title, description, dueDate, priority, notes) {
         this.title = title,
         this.description = description,
@@ -29,6 +30,7 @@ class ToDoTask {
 }
 
 class Project {
+
     constructor (projectName) {
         this.projectName = projectName,
         this.toDoList = []

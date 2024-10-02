@@ -9,7 +9,7 @@
 body {
     display: grid;
     grid-template-columns: 1.5fr 5fr;
-    grid-template-rows: 0.5fr 5fr;
+    grid-template-rows: 1fr 5fr;
 }
 
 .projectList {
@@ -32,7 +32,7 @@ button {
     border-radius: 8px;
 }
 
-button:hover {
+button:hover, img:hover {
     background-color: white;
     color: black;
 }
@@ -137,6 +137,27 @@ textarea {
     gap: 20px;
 }
 
+.headingToDo {
+    text-align: center;
+    text-decoration: underline wavy rgb(137, 240, 11);
+}
+/* #addProject {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
 
+#addProject > img {
+    fill: white;
+    height: 22px;
+} */
 
+.buttonContainerProjectList {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
 
+input:invalid {
+    border: 2px solid rebeccapurple;
+}

@@ -6,10 +6,12 @@
     <title>to-do App</title>
 </head>
 <body>
+    <h2 class="headingToDo">The to-to-DOO App</h2>
     <div class="projectList">
         <h2>Your Project(s)</h2>
         <div class="buttonContainerProjectList">
             <button id="addProject" type="button">New Project</button>
+            <!-- <img src="./icons/plus-circle-outline.svg" alt="plus-circle-img" fill="white">~~ -->
             <button id="deleteProject" type="button">Delete Project</button>
         </div>
         <div class="projectListContainer">
@@ -27,37 +29,39 @@
         </form>
     </dialog>
 
-    <dialog class="taskModal" open>
+    <dialog class="taskModal">
         <form action="./task.txt" method="post">
             <fieldset>
-                <legend>Task Details</legend>
+                <legend>New Task Details</legend>
                 <div class="taskModalMainContainer">
                     <div class="labelsContainer">
-                        <div><label for="">TaskName</label></div>
-                        <div><label>Description</label></div>
-                        <div><label>dueDate</label></div>
-                        <div><label for="">priority</label></div>
-                        <div><label>Notes</label></div>
+                        <div><label for="taskName">Task Name</label></div>
+                        <div><label for="taskDesc">Task Description</label></div>
+                        <div><label for="dueDate">Due Date</label></div>
+                        <div><label for="taskPriority">Task Priority</label></div>
+                        <div><label for="taskNote">Note</label></div>
                     </div>
                     <div class="inputsContainer">
-                        <input type="text">
-                        <input type="text">
-                        <input type="date" name="">
-                        <select name="" id="">
+                        <input id="taskName" name="task_Name" type="text" required>
+                        <input id="taskDesc" name="task_Desc" type="text" required> 
+                        <input id="dueDate" type="date" name="task_dueDate" required>
+                        <select name="task_Priority" id="taskPriority" required>
                             <option value="High">High</option>
                             <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
+                            <option value="Low" selected>Low</option>
                         </select>
-                        <textarea name=""></textarea>
+                        <textarea name="taskNote" id="taskNote"></textarea>
                     </div>
                 </div>
                 <div class="buttonContainerTaskModal">
-                    <button type="reset">Close</button>
-                    <button type="submit">Submit</button>
+                    <button class="taskClose" type="reset">Close</button>
+                    <button class="taskSubmit" type="submit">Submit</button>
                 </div>
             </fieldset>
         </form>
     </dialog>
-
+    <div class="taskContainer">
+        <button class="addTasks">Add Task</button>
+    </div>
 </body>
 </html>
