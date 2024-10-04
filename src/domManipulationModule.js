@@ -1,6 +1,7 @@
 import { populateStorage, fetchStorage } from "./webStorageAPI";
 import { ProjectList } from "./classModule";
 import { createNewTodo, editToDo } from "./applicationLogic";
+import { formatRelative } from "date-fns";
 
 const projectListObject = new ProjectList;
 
@@ -155,7 +156,7 @@ function displayTasks () {
         let innerDiv2 = document.createElement('div');
 
         innerDiv1.textContent = task.getTaskTitle;
-        innerDiv2.textContent = task.getDueDate;
+        innerDiv2.textContent = formatRelative((task.getDueDate), new Date());
 
         divElement.appendChild(innerDiv1);
         divElement.appendChild(innerDiv2);
