@@ -170,4 +170,9 @@ textarea {
 
 .taskContainer > div {
     border: 2px solid red;
+    padding: 20px 0;
+    width: 40%;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 14px;
 }

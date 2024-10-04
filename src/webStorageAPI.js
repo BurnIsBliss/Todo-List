@@ -17,7 +17,6 @@ function initializeProjectsFromSessionStorage() {
                 projectListObject.projectListArray[i].addTask(storageValue[i].toDoList[j].title, storageValue[i].toDoList[j].description, storageValue[i].toDoList[j].dueDate, storageValue[i].toDoList[j].priority, storageValue[i].toDoList[j].notes);
             }
         }
-        console.log(projectListObject, typeof(projectListObject));
     }
 }
 

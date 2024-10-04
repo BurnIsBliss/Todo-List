@@ -133,7 +133,6 @@ function removeChildElements (parent) {
 function displayTasks () {
     if (!document.querySelector('.projectListContainer > div > input:checked')) return
     const taskContainerElement = document.querySelector('.taskContainer');
-    console.log();
     removeChildElements(taskContainerElement);
 
     let elementIndex = -1;
@@ -144,7 +143,11 @@ function displayTasks () {
         }
     }
 
-    for (let task of projectListObject.projectListArray[elementIndex].getToDoList()) {
+    for (let task of projectListObject.projectListArray[elementIndex].getToDoList) {
+        let buttonElement = document.createElement('button');
+        buttonElement.setAttribute('class', task.getTaskTitle);
+        buttonElement.textContent='Delete Task';
+
         let divElement = document.createElement('div');
         divElement.setAttribute('class', task.getTaskTitle);
 
@@ -156,20 +159,41 @@ function displayTasks () {
 
         divElement.appendChild(innerDiv1);
         divElement.appendChild(innerDiv2);
+        divElement.appendChild(buttonElement);
 
         taskContainerElement.appendChild(divElement);
     }
+    deleteTaskButtonFunctionality();
 }
 
 function displayTasksFromProjectList () {
     const allProjectContainer = document.querySelectorAll('.projectListContainer > div');
-    console.log(allProjectContainer);
     allProjectContainer.forEach((element) => {
         element.addEventListener('click', () => displayTasks());
     })
 }
 
-
-
+function deleteTaskButtonFunctionality () {
+    console.log('inside delete task')
+    let deleteButtonNode = document.querySelectorAll('.taskContainer > div > button');
+    deleteButtonNode.forEach((element) => {
+        element.addEventListener('click', (event) => {
+            console.log(event.target);
+            let projectIndex,
+                taskIndex = 0;
+            const projectNameArray = projectListObject.projectListArray.map((element) => element.returnProjectName);
+            projectIndex = projectNameArray.indexOf(document.querySelector('.projectListContainer > div > input:checked').value);
+            for (let i of projectListObject.projectListArray[projectIndex].getToDoList) {
+                if (i.getTaskTitle==event.target.className) {
+                    projectListObject.removeTaskFromProject(projectIndex, taskIndex);
+                    populateStorage(projectListObject.projectListArray);
+                    displayTasks();
+                    break;
+                }
+                else taskIndex += 1;
+            }
+        })
+    })
+}
 
 export {formButtonFunctionality, displayProjectList, projectListObject, deleteButtonFunctionality, displayTasksFromProjectList}

@@ -53,7 +53,7 @@ class Project {
         console.table(this.toDoList);
     }
 
-    getToDoList () {
+    get getToDoList () {
         return this.toDoList;
     }
 
@@ -80,6 +80,10 @@ class ProjectList {
 
     get projectListArray () {
         return this.listOfProject;
+    }
+
+    removeTaskFromProject (projectIndex, taskIndex) {
+        this.listOfProject[projectIndex].deleteTask(taskIndex);
     }
 
     removeProjectFromList (value) {
