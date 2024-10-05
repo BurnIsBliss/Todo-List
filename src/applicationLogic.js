@@ -23,14 +23,12 @@ function valueFromTaskFormEdited () {
 
 function createNewTodo (projectObjectIndex) {
     const taskDetails = valueFromTaskForm();
-    // console.log( projectListObject.projectListArray[projectObjectIndex], projectObjectIndex);
     projectListObject.projectListArray[projectObjectIndex].addTask(taskDetails[0], taskDetails[1], taskDetails[2], taskDetails[3], taskDetails[4]);
 
 }
 
 function editToDo (projectObjectIndex, taskIndex) {
     const taskDetails = valueFromTaskFormEdited();
-    console.log('Task within Project that is to be edited', projectListObject.projectListArray[projectObjectIndex].getToDoList[taskIndex]);
     projectListObject.projectListArray[projectObjectIndex].getToDoList[taskIndex].editTask(taskDetails[0], taskDetails[1], taskDetails[2], taskDetails[3], taskDetails[4]);
 }
 

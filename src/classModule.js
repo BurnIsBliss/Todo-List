@@ -48,18 +48,12 @@ class Project {
         return this.projectName;
     }
 
-    printValues = () => {
-        console.log(this.projectName, this.toDoList.length);
-        console.table(this.toDoList);
-    }
-
     get getToDoList () {
         return this.toDoList;
     }
 
     addTask (title, description, dueDate, priority, notes="") {
         let task = new ToDoTask (title, description, dueDate, priority, notes);
-        // console.log(`inside addTask ${task.values}`);
         this.toDoList.push(task);
     }
 
