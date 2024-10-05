@@ -11,24 +11,36 @@ function valueFromTaskForm () {
     return [taskTitle, taskDescription, taskDueDate, taskPriority, taskNotes];
 }
 
+function valueFromTaskFormEdited () {
+    const taskTitle = document.querySelector('#taskName1').value;
+    const taskDescription = document.querySelector('#taskDesc1').value;
+    const taskDueDate = document.querySelector('#dueDate1').value;
+    const taskPriority = document.querySelector('#taskPriority1').value;
+    const taskNotes = document.querySelector('#taskNote1').value;
+
+    return [taskTitle, taskDescription, taskDueDate, taskPriority, taskNotes];
+}
+
 function createNewTodo (projectObjectIndex) {
     const taskDetails = valueFromTaskForm();
-    console.log( projectListObject.projectListArray[projectObjectIndex], projectObjectIndex);
+    // console.log( projectListObject.projectListArray[projectObjectIndex], projectObjectIndex);
     projectListObject.projectListArray[projectObjectIndex].addTask(taskDetails[0], taskDetails[1], taskDetails[2], taskDetails[3], taskDetails[4]);
 
 }
 
-function editToDo (projectObjectIndex) {
-    const taskDetails = valueFromTaskForm();
-    projectListObject.projectListArray[projectObjectIndex].editTask(taskDetails[0], taskDetails[1], taskDetails[2], taskDetails[3], taskDetails[4]);
+function editToDo (projectObjectIndex, taskIndex) {
+    const taskDetails = valueFromTaskFormEdited();
+    console.log('Task within Project that is to be edited', projectListObject.projectListArray[projectObjectIndex].getToDoList[taskIndex]);
+    projectListObject.projectListArray[projectObjectIndex].getToDoList[taskIndex].editTask(taskDetails[0], taskDetails[1], taskDetails[2], taskDetails[3], taskDetails[4]);
 }
 
-function markAsComplete () {
+// To-Do
+// function markAsComplete () {
     
-}
+// }
 
-function changePriority () {
+// function changePriority () {
 
-}
+// }
 
 export {createNewTodo, editToDo}

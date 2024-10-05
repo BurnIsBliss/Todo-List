@@ -86,50 +86,80 @@ function removeChildElements (parent) {
     while (parent.lastChild) parent.removeChild(parent.lastChild);
 }
 
-(function () {
-    const submitTaskButton = document.querySelector('.taskSubmit');
+function taskModalButtonFunctionality1 () {
     const closeTaskButton = document.querySelector('.taskClose');
+    const submitTaskButton = document.querySelector('.taskSubmit');
 
     closeTaskButton.addEventListener ('click', () => {
         document.querySelector('.taskModal').close();
     })
 
     submitTaskButton.addEventListener ('click', (event) => {
-
-        if (document.querySelector('#taskName').value && document.querySelector('#taskDesc').value && document.querySelector('#dueDate').value) {
-            event.preventDefault();
-            let elementIndex = -1;
-            let fetchStorageOutput = fetchStorage();
-            let inputElementValue = (document.querySelector('.projectListContainer > div > input:checked').value);
-            for (let i in fetchStorageOutput) {
-                if (fetchStorageOutput[i].projectName == inputElementValue) {
-                    elementIndex = i; 
-                    break;
+            console.log('inside task SUBMIT');
+            if (document.querySelector('#taskName').value && document.querySelector('#taskDesc').value && document.querySelector('#dueDate').value) {
+                let elementIndex = -1;
+                let fetchStorageOutput = fetchStorage();
+                let inputElementValue = (document.querySelector('.projectListContainer > div > input:checked').value);
+                for (let i in fetchStorageOutput) {
+                    if (fetchStorageOutput[i].projectName == inputElementValue) {
+                        elementIndex = i; 
+                        break;
+                    }
                 }
+                createNewTodo(elementIndex);
+                populateStorage(projectListObject.projectListArray);
+                document.querySelector('.taskModal > form').reset();
+                document.querySelector('.taskModal').close();
+                displayTasks();
+                event.preventDefault();
             }
-            console.log(inputElementValue, elementIndex);
-            createNewTodo(elementIndex);
-            populateStorage(projectListObject.projectListArray);
-            console.log(projectListObject.projectListArray);
-            document.querySelector('.taskModal > form').reset();
-            document.querySelector('.taskModal').close();
-            // displayTasks(document.querySelector('.projectListContainer > div > input:checked').value);
-            displayTasks();
-        }
+    })
+};
+
+function taskModalButtonFunctionality2 (taskName) {
+    const closeTaskButton = document.querySelector('.taskClose1');
+    const submitTaskButton = document.querySelector('.taskSubmit1');
+
+    closeTaskButton.addEventListener ('click', () => {
+        document.querySelector('.taskModalEdit').close();
     })
 
-})();
+    submitTaskButton.addEventListener('click', (event) => {
+        console.log('inside task EDIT');
+        if (document.querySelector('#taskName1').value && document.querySelector('#taskDesc1').value && document.querySelector('#dueDate1').value) {
+            let selectedProject = document.querySelector('.projectListContainer > div > input:checked').value;
+            let availableProjects = projectListObject.projectListArray.map((element) => element.returnProjectName);
+            let projectIndex = availableProjects.indexOf(selectedProject);
+            let taskIndex = 0
+
+            for (let i of projectListObject.projectListArray[projectIndex].getToDoList) {
+                if (i.getTaskTitle == taskName) {
+                    break;
+                }
+                else taskIndex += 1;
+            }
+            editToDo(projectIndex, taskIndex);
+            populateStorage(projectListObject.projectListArray);
+            document.querySelector('.taskModalEdit > form').reset();
+            document.querySelector('.taskModalEdit').close();
+            displayTasks();
+            event.preventDefault();
+        }
+    })
+}
+
 
 // Function to add the 'Add Task' button functionality
-(function (){
+function addTaskButtonFunctionality(){
     const addTaskButton = document.querySelector('.addTasks');
     addTaskButton.addEventListener ("click", () => {
         if (document.querySelector('.projectListContainer > div > input:checked')) {
             document.querySelector('.taskModal').showModal();
+            taskModalButtonFunctionality1();
         }
         else alert('Select a project or create new one');
     })
-})();
+};
 
 function displayTasks () {
     if (!document.querySelector('.projectListContainer > div > input:checked')) return
@@ -145,9 +175,21 @@ function displayTasks () {
     }
 
     for (let task of projectListObject.projectListArray[elementIndex].getToDoList) {
+
+        let buttonContainer = document.createElement('div');
+        buttonContainer.setAttribute('class', 'taskButtonContainer');
+
         let buttonElement = document.createElement('button');
         buttonElement.setAttribute('class', task.getTaskTitle);
+        buttonElement.setAttribute('id', 'deleteTask');
         buttonElement.textContent='Delete Task';
+
+        let buttonEditTask = document.createElement('button');
+        buttonEditTask.textContent = 'Edit Task';
+        buttonEditTask.setAttribute('class', task.getTaskTitle);
+        buttonEditTask.setAttribute('id', 'editTask');
+
+        buttonContainer.append(buttonEditTask, buttonElement);
 
         let divElement = document.createElement('div');
         divElement.setAttribute('class', task.getTaskTitle);
@@ -155,16 +197,16 @@ function displayTasks () {
         let innerDiv1 = document.createElement('div');
         let innerDiv2 = document.createElement('div');
 
-        innerDiv1.textContent = task.getTaskTitle;
-        innerDiv2.textContent = formatRelative((task.getDueDate), new Date());
+        innerDiv1.textContent = `Task Name: ${task.getTaskTitle}`;
+        innerDiv2.textContent = `Due on: ${formatRelative((task.getDueDate), new Date())}`;
 
         divElement.appendChild(innerDiv1);
         divElement.appendChild(innerDiv2);
-        divElement.appendChild(buttonElement);
+        divElement.appendChild(buttonContainer);
 
         taskContainerElement.appendChild(divElement);
     }
-    deleteTaskButtonFunctionality();
+    deleteTaskNEditTaskButtonsFunctionality();
 }
 
 function displayTasksFromProjectList () {
@@ -174,12 +216,10 @@ function displayTasksFromProjectList () {
     })
 }
 
-function deleteTaskButtonFunctionality () {
-    console.log('inside delete task')
-    let deleteButtonNode = document.querySelectorAll('.taskContainer > div > button');
+function deleteTaskNEditTaskButtonsFunctionality () {
+    let deleteButtonNode = document.querySelectorAll('#deleteTask');
     deleteButtonNode.forEach((element) => {
         element.addEventListener('click', (event) => {
-            console.log(event.target);
             let projectIndex,
                 taskIndex = 0;
             const projectNameArray = projectListObject.projectListArray.map((element) => element.returnProjectName);
@@ -195,6 +235,16 @@ function deleteTaskButtonFunctionality () {
             }
         })
     })
+    // using id for multiple element (like in this case for multiple edit/delete buttons) is not the right way
+    let editButtonNode = document.querySelectorAll('#editTask');
+    editButtonNode.forEach ((element) => {
+        element.addEventListener('click', (event) => {
+            document.querySelector('.taskModalEdit').showModal();
+            taskModalButtonFunctionality2(event.target.className);
+        })
+    })
 }
 
+
+addTaskButtonFunctionality();
 export {formButtonFunctionality, displayProjectList, projectListObject, deleteButtonFunctionality, displayTasksFromProjectList}

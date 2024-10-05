@@ -31,7 +31,7 @@
     <dialog class="taskModal">
         <form action="./task.txt" method="post">
             <fieldset>
-                <legend>Enter New/Edit Task Details</legend>
+                <legend>Create New Task Details</legend>
                 <div class="taskModalMainContainer">
                     <div class="labelsContainer">
                         <div><label for="taskName">Task Name</label></div>
@@ -54,11 +54,46 @@
                 </div>
                 <div class="buttonContainerTaskModal">
                     <button class="taskClose" type="reset">Close</button>
-                    <button class="taskSubmit" type="submit">Submit</button>
+                    <button class="taskSubmit" type="button">Submit</button>
                 </div>
             </fieldset>
         </form>
     </dialog>
+
+    <dialog class="taskModalEdit">
+        <form action="./task.txt" method="post">
+            <fieldset>
+                <legend>Edit Task Details</legend>
+                <div class="taskModalMainContainer">
+                    <div class="labelsContainer">
+                        <div><label for="taskName1">Task Name</label></div>
+                        <div><label for="taskDesc1">Task Description</label></div>
+                        <div><label for="dueDate1">Due Date</label></div>
+                        <div><label for="taskPriority1">Task Priority</label></div>
+                        <div><label for="taskNote1">Note</label></div>
+                    </div>
+                    <div class="inputsContainer">
+                        <input id="taskName1" name="task_Name" type="text" required>
+                        <input id="taskDesc1" name="task_Desc" type="text" required> 
+                        <input id="dueDate1" type="date" name="task_dueDate" required>
+                        <select name="task_Priority" id="taskPriority1" required>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low" selected>Low</option>
+                        </select>
+                        <textarea name="taskNote" id="taskNote1"></textarea>
+                    </div>
+                </div>
+                <div class="buttonContainerTaskModal">
+                    <button class="taskClose1" type="reset">Close</button>
+                    <button class="taskSubmit1" type="button">Submit</button>
+                </div>
+            </fieldset>
+        </form>
+    </dialog>
+
+
+
     <div class="leftContainer">
         <h2 class="headingToDo">The to-to-DOO App</h2>
         <div class="addTaskButtonContainer">
